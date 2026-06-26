@@ -20,6 +20,7 @@ yarn-error.log*
 # ts
 *.tsbuildinfo
 
+package-lock.json/
 
 # OS files
 .DS_Store

@@ -4,14 +4,8 @@ import { TECH_PLANNER_PROMPT } from "./architect.js";
 import dotenv from "dotenv";
 import path from "path";
 dotenv.config();
-
-const llm = new ChatOpenAI({
-  model: "llama-3.3-70b-versatile",
-  apiKey: process.env.GROQ_API_KEY,
-  configuration: {
-    baseURL: "https://api.groq.com/openai/v1",
-  },
-});
+import { connectionToGroq } from "../../llm/providers/groq.js";
+const llm = connectionToGroq();
 
 export class PlannerAgent {
   async execute(userPrompt: string) {
