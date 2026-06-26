@@ -19,20 +19,6 @@ export const PlannerSchema = z.object({
 
   userStories: z.array(z.string()),
 
-  apiEndpoints: z.array(
-    z.object({
-      method: z.string(),
-      path: z.string(),
-    })
-  ),
-
-  databaseEntities: z.array(
-    z.object({
-      name: z.string(),
-      fields: z.array(z.string()),
-    })
-  ),
-
   nonFunctionalRequirements: z.object({
     performance: z.string(),
     availability: z.string(),

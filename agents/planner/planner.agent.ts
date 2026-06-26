@@ -1,6 +1,7 @@
 import { ChatOpenAI } from "@langchain/openai";
 import dotenv from "dotenv";
 import { PlannerSchema } from "./planner.schema.js";
+import type { PlannerOutput } from "./planner.schema.js";
 import { PLANNER_PROMPT } from "./planner.prompt.js";
 import { repairPlannerOutput } from "../../utils/repairPlannerOutput.js";
 dotenv.config();
@@ -39,13 +40,6 @@ export class PlannerAgent {
     });
     const result = PlannerSchema.safeParse(repaired);
     console.log("Repaired:");
-    if (!result.success) {
-      console.log("Planner Validation Failed");
-
-      console.dir(result.error.format(), { depth: null });
-
-      throw new Error("Planner schema validation failed");
-    }
-    return result.data;
+    return result;
   }
 }

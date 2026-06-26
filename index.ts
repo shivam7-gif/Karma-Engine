@@ -1,5 +1,13 @@
-import { architectNode } from "./agents/architect/architect.node";
-import { PlannerTesting } from "./agents/planner/test.js";
+import { app } from "./graph/graph.js";
+import PromptSync from "prompt-sync";
+import chalk from "chalk";
+const prompt = PromptSync();
+const userPrompt = prompt(chalk.blue("Enter your prompt : "));
 
-// architectNode();
-PlannerTesting();
+const result = await app.invoke({
+  userPrompt,
+});
+
+console.log(chalk.green.bold("Final output"));
+
+console.log(JSON.stringify(result, null, 2));
