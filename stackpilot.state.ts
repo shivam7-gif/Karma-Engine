@@ -8,4 +8,5 @@ export const StackPilotState = Annotation.Root({
   backendPlan : Annotation<string>(),
   databasePlan : Annotation<string>(),
   devopsPlan : Annotation<string>(),
+  metrics : Annotation<ExecutionMetrics>(),
 });
