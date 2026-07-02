@@ -9,4 +9,7 @@ export const StackPilotState = Annotation.Root({
   databasePlan : Annotation<string>(),
   devopsPlan : Annotation<string>(),
   metrics : Annotation<ExecutionMetrics>(),
+  // H1 code generation output
+  generatedFiles: Annotation<{ path: string; code: string; action: string }[]>(),
+  generatedProjectName: Annotation<string>(),
 });
