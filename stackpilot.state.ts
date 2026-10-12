@@ -1,4 +1,5 @@
 import {Annotation} from "@langchain/langgraph";
+import type { ExecutionMetrics } from "./monitoring/metrics.js";
 
 export const StackPilotState = Annotation.Root({
   userPrompt : Annotation<string>(),

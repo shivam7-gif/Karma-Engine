@@ -1,4 +1,5 @@
 import { ChatOpenAI } from "@langchain/openai";
+import { jsonrepair } from "jsonrepair";
 import dotenv from "dotenv";
 import { PlannerSchema } from "./planner.schema.js";
 import type { PlannerOutput } from "./planner.schema.js";
@@ -7,14 +8,14 @@ import { repairPlannerOutput } from "../../utils/repairPlannerOutput.js";
 dotenv.config();
 import { connectionToGroq } from "../../llm/providers/groq.js";
 
-const llm = connectionToGroq();
+const llm = connectionToGroq(900);
 
 export class PlannerAgent {
   async execute(userPrompt: string) {
     const response = await llm.invoke([
       {
         role: "system",
-        content: PLANNER_PROMPT,
+        content: typeof PLANNER_PROMPT === "function" ? PLANNER_PROMPT() : PLANNER_PROMPT,
       },
       {
         role: "user",
@@ -28,7 +29,7 @@ export class PlannerAgent {
       .trim();
     console.log("raw content : ");
     console.log(response.content);
-    const parsed = JSON.parse(cleaned);
+    const parsed = JSON.parse(jsonrepair(cleaned));
     console.log("Parsed:");
     console.dir(parsed, {
       depth: null,

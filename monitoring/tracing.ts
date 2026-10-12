@@ -1,4 +1,4 @@
-import {RunnableConfig} from "@langchain/core/runnables";
+import type { RunnableConfig } from "@langchain/core/runnables";
 
 export interface TraceOptions{
   runName : string;

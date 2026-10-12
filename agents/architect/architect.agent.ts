@@ -1,6 +1,8 @@
 import { ArchitectureSchema } from "./architect.schema.js";
+import { jsonrepair } from "jsonrepair";
 
 import type { ArchitectureOutput } from "./architect.schema.js";
+import type { PlannerOutput } from "../planner/planner.schema.js";
 import { TECH_PLANNER_PROMPT } from "./architect.js";
 import dotenv from "dotenv";
 dotenv.config();
@@ -29,7 +31,7 @@ Return ONLY valid JSON.
       .replace(/```json/g, "")
       .replace(/```/g, "")
       .trim();
-    const parsed = JSON.parse(cleaned);
+    const parsed = JSON.parse(jsonrepair(cleaned));
     return ArchitectureSchema.parse(parsed);
   }
 }

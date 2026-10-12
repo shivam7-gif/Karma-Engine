@@ -1,10 +1,8 @@
 import { Annotation } from "@langchain/langgraph";
-import type { TechPlan } from "../agents/planner/tech.schema";
-
 export const StackPilotTechState = Annotation.Root({
   prompt: Annotation<string>(),
 
-  techPlan: Annotation<TechPlan>(),
+  techPlan: Annotation<any>(),
 
   architecture: Annotation<any>(),
 

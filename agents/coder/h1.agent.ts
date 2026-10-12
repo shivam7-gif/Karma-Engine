@@ -1,4 +1,5 @@
 import chalk from "chalk";
+import { jsonrepair } from "jsonrepair";
 import dotenv from "dotenv";
 dotenv.config();
 import { connectionToGroq } from "../../llm/providers/groq.js";
@@ -46,7 +47,9 @@ Return ONLY valid JSON that matches the output format — no markdown, no explan
       throw new Error("[KARMA H1] Could not locate JSON in LLM response");
     }
 
-    const parsed = JSON.parse(cleaned.slice(jsonStart, jsonEnd + 1));
+    const parsed = JSON.parse(
+      jsonrepair(cleaned.slice(jsonStart, jsonEnd + 1))
+    );
     const validated = H1OutputSchema.parse(parsed);
 
     console.log(
